@@ -8,15 +8,15 @@ Ensuite Les serveur web apache communique avec php afin de charger la connection
 # Commande pour lancer le projet
 note: assurer vous de modifier votre fichier etc/hosts pour pouvoir appeller tp3.com ou www.tp3.com
 
-lancer les conteneurs
+- lancer les conteneurs
  ``` docker compose up --build -d ```
-utiliser les logs pour verifier que tout fonctionne
+- utiliser les logs pour verifier que tout fonctionne
 ``` docker compose logs ```
-verifier les ports ouverts
+- verifier les ports ouverts
 ``` ss -tnap ```
-note: vous pouvez ajouter grep | port
+- note: vous pouvez ajouter grep | port
 afin de verifier un port specifique
 
-pour arreter le projet et nettoyer 
+- pour arreter le projet et nettoyer 
 ``` docker compose down --rmi local -v ```
 
