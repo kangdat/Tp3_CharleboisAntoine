@@ -1,0 +1,80 @@
+
+version: '3'
+
+services:
+  proxy:
+    image: nginx:alpine # utilise la version la plus récente
+    ports:
+      - '80:80' # expose 80 sur l’hôte et envoie à 80 dans conteneur
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - frontend
+    depends_on:
+      - serveur1
+      - serveur2
+
+  serveur1:
+    build: './serveur1/'
+    depends_on:
+        - php1
+        - mariadb1
+    volumes:
+      - ./serveur1/mariadb1/html:/usr/local/apache2/htdocs/
+    networks:
+      - frontend
+      - backend1
+
+  serveur2:
+    build: './serveur2/'
+    depends_on:
+        - php2
+        - mariadb2
+    volumes:
+      - ./serveur2/mariadb2/html:/usr/local/apache2/htdocs/
+    networks:
+      - frontend
+      - backend2
+
+  php1:
+    build: './php1/'
+    networks:
+        - backend1
+    volumes:
+        - ./serveur1/mariadb1/html/:/usr/local/apache2/htdocs/
+  php2:
+    build: './php2/'
+    networks:
+        - backend2
+    volumes:
+        - ./serveur2/mariadb2/html:/usr/local/apache2/htdocs/
+
+  mariadb1:
+    image: mariadb
+    networks:
+        - backend1
+    environment:
+        - MYSQL_ROOT_PASSWORD=rootpassword
+    volumes:
+        - ./serveur1/dbdata1:/var/lib/mysql
+    ports:
+        - '3306:3306'
+  mariadb2:
+    image: mariadb
+    networks:
+        - backend2
+    environment:
+        - MYSQL_ROOT_PASSWORD=rootpassword
+    volumes:
+        - ./serveur2/dbdata2:/var/lib/mysql
+    ports:
+        - '3307:3307'
+networks:
+  frontend:
+  backend1:
+  backend2:
+
+volumes:
+  dbdata1:
+  dbdata2:
+
