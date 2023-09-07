@@ -24,4 +24,4 @@ afin de verifier un port specifique
 ``` docker compose down --rmi local -v ```
 
 # image de validation
-![](validation.png)
+![validation](validation.png)
