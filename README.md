@@ -23,3 +23,5 @@ afin de verifier un port specifique
 - pour arreter le projet et nettoyer 
 ``` docker compose down --rmi local -v ```
 
+# image de validation
+![](validation.png)
