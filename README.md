@@ -9,11 +9,14 @@ Ensuite Les serveur web apache communique avec php afin de charger la connection
 note: assurer vous de modifier votre fichier etc/hosts pour pouvoir appeller tp3.com ou www.tp3.com
 
 - lancer les conteneurs
- ``` docker compose up --build -d ```
+  ``` docker compose up --build -d ```
+  
 - utiliser les logs pour verifier que tout fonctionne
 ``` docker compose logs ```
+
 - verifier les ports ouverts
 ``` ss -tnap ```
+
 - note: vous pouvez ajouter grep | port
 afin de verifier un port specifique
 
